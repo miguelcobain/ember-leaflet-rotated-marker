@@ -16,6 +16,6 @@ module.exports = {
   },
 
   afterInstall: function(options) {
-   return this.addBowerPackageToProject('bbecquet/Leaflet.RotatedMarker');
+   return this.addBowerPackageToProject('Leaflet.RotatedMarker', 'bbecquet/Leaflet.RotatedMarker');
   }
 };
