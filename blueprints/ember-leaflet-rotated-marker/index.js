@@ -1,6 +1,6 @@
 /*jshint node:true*/
 module.exports = {
-  description: 'push bbecquet/Leaflet.RotatedMarker repo using bower',
+  description: 'pull bbecquet/Leaflet.RotatedMarker repo using bower',
 
   // locals: function(options) {
   //   // Return custom template variables here.

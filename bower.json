@@ -12,6 +12,7 @@
     "jquery": "^1.11.3",
     "loader.js": "ember-cli/loader.js#3.4.0",
     "qunit": "~1.20.0",
-    "leaflet": "~0.7.7"
+    "leaflet": "~0.7.7",
+    "Leaflet.RotatedMarker": "bbecquet/Leaflet.RotatedMarker"
   }
 }
