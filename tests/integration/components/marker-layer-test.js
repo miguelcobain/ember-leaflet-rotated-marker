@@ -5,19 +5,11 @@ import hbs from 'htmlbars-inline-precompile';
 //Needed to silence leaflet autodetection error
 L.Icon.Default.imagePath = 'some-path';
 
-function getAngle(matrix) {
-  let values = matrix.split('(')[1];
-  values = values.split(')')[0];
-  let [,b,,] = values.split(',');
-
-  return Math.round(Math.asin(b) * (180 / Math.PI));
-}
-
 moduleForComponent('marker-layer', 'Integration | Component | marker layer', {
   integration: true
 });
 
-test('rotation is set', function(assert) {
+test('rotation is set and updates', function(assert) {
 
   this.set('rotationAngle', 30);
 
@@ -27,17 +19,28 @@ test('rotation is set', function(assert) {
     {{/leaflet-map}}
   `);
 
-  let matrix = this.$('.leaflet-marker-icon').css('transform');
 
-  let angle = getAngle(matrix);
-
-  assert.equal(angle, 30);
+  assert.ok(this.$('.leaflet-marker-icon').attr('style').indexOf('rotateZ(30deg)') !== -1);
 
   this.set('rotationAngle', 45);
 
-  matrix = this.$('.leaflet-marker-icon').css('transform');
+  assert.ok(this.$('.leaflet-marker-icon').attr('style').indexOf('rotateZ(45deg)') !== -1);
+});
 
-  angle = getAngle(matrix);
+test('rotation origin is set and updates', function(assert) {
 
-  assert.equal(angle, 45);
+  this.set('rotationOrigin', 'top right');
+
+  this.render(hbs`
+    {{#leaflet-map lat=51.512983 lng=-0.138289 zoom=12}}
+      {{marker-layer lat=51.512983 lng=-0.138289 rotationOrigin=rotationOrigin rotationAngle=90}}
+    {{/leaflet-map}}
+  `);
+
+
+  assert.ok(this.$('.leaflet-marker-icon').attr('style').indexOf('transform-origin: 100% 0%') !== -1);
+
+  this.set('rotationOrigin', '25% 25%');
+
+  assert.ok(this.$('.leaflet-marker-icon').attr('style').indexOf('transform-origin: 25% 25%') !== -1);
 });
