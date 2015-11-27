@@ -1,6 +1,6 @@
 {
   "name": "ember-leaflet-rotated-marker",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "ember-leaflet addon that provides a maker that supports rotation",
   "directories": {
     "doc": "doc",
