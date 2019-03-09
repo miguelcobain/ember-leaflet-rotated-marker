@@ -1,46 +1,46 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 /* global L */
 
-//Needed to silence leaflet autodetection error
+// Needed to silence leaflet autodetection error
 L.Icon.Default.imagePath = 'some-path';
 
-moduleForComponent('marker-layer', 'Integration | Component | marker layer', {
-  integration: true
-});
+module('Integration | Component | marker layer', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('rotation is set and updates', function(assert) {
+  test('rotation is set and updates', async function(assert) {
 
-  this.set('rotationAngle', 30);
+    this.set('rotationAngle', 30);
 
-  this.render(hbs`
-    {{#leaflet-map lat=51.512983 lng=-0.138289 zoom=12}}
-      {{marker-layer lat=51.512983 lng=-0.138289 rotationAngle=rotationAngle}}
-    {{/leaflet-map}}
-  `);
+    await render(hbs`
+      {{#leaflet-map lat=51.512983 lng=-0.138289 zoom=12}}
+        {{marker-layer lat=51.512983 lng=-0.138289 rotationAngle=rotationAngle}}
+      {{/leaflet-map}}
+    `);
 
+    assert.dom('.leaflet-marker-icon').hasAttribute('style', /rotateZ\(30deg\)/);
 
-  assert.ok(this.$('.leaflet-marker-icon').attr('style').indexOf('rotateZ(30deg)') !== -1);
+    this.set('rotationAngle', 45);
 
-  this.set('rotationAngle', 45);
+    assert.dom('.leaflet-marker-icon').hasAttribute('style', /rotateZ\(45deg\)/);
+  });
 
-  assert.ok(this.$('.leaflet-marker-icon').attr('style').indexOf('rotateZ(45deg)') !== -1);
-});
+  test('rotation origin is set and updates', async function(assert) {
 
-test('rotation origin is set and updates', function(assert) {
+    this.set('rotationOrigin', 'right top');
 
-  this.set('rotationOrigin', 'top right');
+    await render(hbs`
+      {{#leaflet-map lat=51.512983 lng=-0.138289 zoom=12}}
+        {{marker-layer lat=51.512983 lng=-0.138289 rotationOrigin=rotationOrigin rotationAngle=90}}
+      {{/leaflet-map}}
+    `);
 
-  this.render(hbs`
-    {{#leaflet-map lat=51.512983 lng=-0.138289 zoom=12}}
-      {{marker-layer lat=51.512983 lng=-0.138289 rotationOrigin=rotationOrigin rotationAngle=90}}
-    {{/leaflet-map}}
-  `);
+    assert.dom('.leaflet-marker-icon').hasAttribute('style', /transform-origin: right top/);
 
+    this.set('rotationOrigin', '25% 25%');
 
-  assert.ok(this.$('.leaflet-marker-icon').attr('style').indexOf('transform-origin: 100% 0%') !== -1);
-
-  this.set('rotationOrigin', '25% 25%');
-
-  assert.ok(this.$('.leaflet-marker-icon').attr('style').indexOf('transform-origin: 25% 25%') !== -1);
+    assert.dom('.leaflet-marker-icon').hasAttribute('style', /transform-origin: 25% 25%/);
+  });
 });
