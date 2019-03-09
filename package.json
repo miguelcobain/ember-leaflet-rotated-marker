@@ -1,6 +1,6 @@
 {
   "name": "ember-leaflet-rotated-marker",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "ember-leaflet addon that provides a marker that supports rotation",
   "keywords": [
     "ember-addon",
