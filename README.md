@@ -1,20 +1,20 @@
 # ember-leaflet-rotated-marker [![Build Status](https://travis-ci.org/miguelcobain/ember-leaflet-rotated-marker.svg)](https://travis-ci.org/miguelcobain/ember-leaflet-rotated-marker) [![Ember Observer Score](http://emberobserver.com/badges/ember-leaflet-rotated-marker.svg)](http://emberobserver.com/addons/ember-leaflet-rotated-marker) [![npm version](https://badge.fury.io/js/ember-leaflet-rotated-marker.svg)](https://badge.fury.io/js/ember-leaflet-rotated-marker)
 
-This addon extends [ember-leaflet](http://www.ember-leaflet.com/) 2.0. It extends the `{{marker-layer}}` component to support rotation.
+This addon extends [ember-leaflet](http://www.ember-leaflet.com/)'s `{{marker-layer}}` component to support rotation.
 This uses [this leaflet extension](https://github.com/bbecquet/Leaflet.RotatedMarker) to accomplish that. Doesn't work on IE < 9.
 
 ## Usage
 
 ```hbs
-{{#leaflet-map lat=51.512983 lng=-0.138289 zoom=12}}
-  {{marker-layer lat=51.512983 lng=-0.138289 rotationAngle=90 rotationOrigin="25% 25%"}}
-{{/leaflet-map}}
+<LeafletMap @lat={{51.512983}} @lng={{-0.138289}} @zoom={{12}} as |layers|>
+  <layers.marker @lat={{51.512983}} @lng=-{{0.138289}} @rotationAngle={{90}} @rotationOrigin="25% 25%">
+</LeafletMap>
 ```
 
-Option | Type | Default | Description  
+Argument | Type | Default | Description  
 -------|------|---------|------------
-**`rotationAngle`** | `Number` | 0 | Rotation angle, in degrees, clockwise.
-**`rotationOrigin`** | `String` | `'bottom center'` | The rotation center, as a [`transform-origin`](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin) CSS rule.
+**`@rotationAngle`** | `Number` | 0 | Rotation angle, in degrees, clockwise.
+**`@rotationOrigin`** | `String` | `'bottom center'` | The rotation center, as a [`transform-origin`](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin) CSS rule.
 
 ## Installation
 
