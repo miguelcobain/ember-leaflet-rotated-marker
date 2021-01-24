@@ -1,6 +1,6 @@
 # ember-leaflet-rotated-marker [![CI](https://github.com/miguelcobain/ember-leaflet-rotated-marker/workflows/CI/badge.svg)](https://github.com/miguelcobain/ember-leaflet-rotated-marker/actions?query=workflow%3ACI) [![Ember Observer Score](http://emberobserver.com/badges/ember-leaflet-rotated-marker.svg)](http://emberobserver.com/addons/ember-leaflet-rotated-marker) [![npm version](https://badge.fury.io/js/ember-leaflet-rotated-marker.svg)](https://badge.fury.io/js/ember-leaflet-rotated-marker)
 
-This addon extends [ember-leaflet](http://www.ember-leaflet.com/)'s `{{marker-layer}}` component to support rotation.
+This addon extends [ember-leaflet](http://www.ember-leaflet.com/)'s `<layers.marker>` component to support rotation.
 This uses [this leaflet extension](https://github.com/bbecquet/Leaflet.RotatedMarker) to accomplish that. Doesn't work on IE < 9.
 
 ## Usage
