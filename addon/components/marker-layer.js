@@ -1,11 +1,11 @@
-import MarkerLayerComponent from 'ember-leaflet/components/marker-layer';
+import MarkerLayer from 'ember-leaflet/components/marker-layer';
 
-export default MarkerLayerComponent.extend({
-  leafletOptions: Object.freeze([
-    'rotationAngle', 'rotationOrigin'
-  ]),
+export default class RotatedMarketLayer extends MarkerLayer {
+  leafletOptions = [...this.leafletOptions, 'rotationAngle', 'rotationOrigin'];
 
-  leafletProperties: Object.freeze([
-    'rotationAngle', 'rotationOrigin'
-  ])
-});
+  leafletDescriptors = [
+    ...this.leafletDescriptors,
+    'rotationAngle',
+    'rotationOrigin',
+  ];
+}

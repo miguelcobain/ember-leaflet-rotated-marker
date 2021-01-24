@@ -1,5 +1,7 @@
+{{page-title "Dummy"}}
+
 <h2 id="title">Welcome to Ember</h2>
 
-{{#leaflet-map lat=51.512983 lng=-0.138289 zoom=12}}
-  {{marker-layer lat=51.512983 lng=-0.138289 rotationAngle=90}}
-{{/leaflet-map}}
+<LeafletMap @lat={{51.512983}} @lng={{-0.138289}} @zoom={{12}} as |layers|>
+  <layers.marker @lat={{51.512983}} @lng={{-0.138289}} @rotationAngle={{90}}/>
+</LeafletMap>

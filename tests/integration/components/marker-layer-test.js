@@ -7,40 +7,46 @@ import hbs from 'htmlbars-inline-precompile';
 // Needed to silence leaflet autodetection error
 L.Icon.Default.imagePath = 'some-path';
 
-module('Integration | Component | marker layer', function(hooks) {
+module('Integration | Component | marker layer', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('rotation is set and updates', async function(assert) {
-
-    this.set('rotationAngle', 30);
+  test('rotation is set and updates', async function (assert) {
+    this.rotationAngle = 30;
 
     await render(hbs`
-      {{#leaflet-map lat=51.512983 lng=-0.138289 zoom=12}}
-        {{marker-layer lat=51.512983 lng=-0.138289 rotationAngle=rotationAngle}}
-      {{/leaflet-map}}
+      <LeafletMap @lat={{51.512983}} @lng={{-0.138289}} @zoom={{12}} as |layers|>
+        <layers.marker @lat={{51.512983}} @lng={{-0.138289}} @rotationAngle={{this.rotationAngle}}/>
+      </LeafletMap>
     `);
 
-    assert.dom('.leaflet-marker-icon').hasAttribute('style', /rotateZ\(30deg\)/);
+    assert
+      .dom('.leaflet-marker-icon')
+      .hasAttribute('style', /rotateZ\(30deg\)/);
 
     this.set('rotationAngle', 45);
 
-    assert.dom('.leaflet-marker-icon').hasAttribute('style', /rotateZ\(45deg\)/);
+    assert
+      .dom('.leaflet-marker-icon')
+      .hasAttribute('style', /rotateZ\(45deg\)/);
   });
 
-  test('rotation origin is set and updates', async function(assert) {
-
-    this.set('rotationOrigin', 'right top');
+  test('rotation origin is set and updates', async function (assert) {
+    this.rotationOrigin = 'right top';
 
     await render(hbs`
-      {{#leaflet-map lat=51.512983 lng=-0.138289 zoom=12}}
-        {{marker-layer lat=51.512983 lng=-0.138289 rotationOrigin=rotationOrigin rotationAngle=90}}
-      {{/leaflet-map}}
+      <LeafletMap @lat={{51.512983}} @lng={{-0.138289}} @zoom={{12}} as |layers|>
+        <layers.marker @lat={{51.512983}} @lng={{-0.138289}} @rotationOrigin={{this.rotationOrigin}} @rotationAngle={{90}}/>
+      </LeafletMap>
     `);
 
-    assert.dom('.leaflet-marker-icon').hasAttribute('style', /transform-origin: right top/);
+    assert
+      .dom('.leaflet-marker-icon')
+      .hasAttribute('style', /transform-origin: right top/);
 
     this.set('rotationOrigin', '25% 25%');
 
-    assert.dom('.leaflet-marker-icon').hasAttribute('style', /transform-origin: 25% 25%/);
+    assert
+      .dom('.leaflet-marker-icon')
+      .hasAttribute('style', /transform-origin: 25% 25%/);
   });
 });

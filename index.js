@@ -4,8 +4,8 @@ const FASTBOOT_TRANSFORMATION_OPTION = {
   using: [
     {
       transformation: 'fastbootShim',
-    }
-  ]
+    },
+  ],
 };
 
 module.exports = {
@@ -15,6 +15,9 @@ module.exports = {
 
     let hasFastboot = this.project.findAddonByName('ember-cli-fastboot');
     let importOptions = hasFastboot ? FASTBOOT_TRANSFORMATION_OPTION : {};
-    app.import('node_modules/leaflet-rotatedmarker/leaflet.rotatedMarker.js', importOptions);
-  }
+    app.import(
+      'node_modules/leaflet-rotatedmarker/leaflet.rotatedMarker.js',
+      importOptions
+    );
+  },
 };
